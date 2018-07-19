@@ -121,6 +121,71 @@ class App extends Component {
           margin="normal"
           min={0}
         />
+        <FormControl>
+          <InputLabel htmlFor="Nivel de estudios alcanzado">Nivel de estudios alcanzado</InputLabel>
+          <Select
+            value={this.state['Nivel de estudios alcanzado']}
+            onChange={this.handleChange}
+            inputProps={{
+              name: 'Nivel de estudios alcanzado',
+              id: 'Nivel de estudios alcanzado',
+            }}
+          >
+            <MenuItem value="Primario">Primario</MenuItem>
+            <MenuItem value="Secundario">Secundario</MenuItem>
+            <MenuItem value="Terciario">Terciario</MenuItem>
+            <MenuItem value="Universitario">Universitario</MenuItem>
+            <MenuItem value="Posgrado">Posgrado</MenuItem>
+            <MenuItem value="Doctorado">Doctorado</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl>
+          <InputLabel htmlFor="Estado">Estado</InputLabel>
+          <Select
+            value={this.state['Estado']}
+            onChange={this.handleChange}
+            inputProps={{
+              name: 'Estado',
+              id: 'Estado',
+            }}
+          >
+            <MenuItem value="En curso">En curso</MenuItem>
+            <MenuItem value="Incompleto">Incompleto</MenuItem>
+            <MenuItem value="Completado">Completado</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl>
+          <RadioGroup
+            aria-label="¿Estudiaste una carrera relacionada a Informática? (Lic. en Sistemas, Ingeniería Informática, etc)"
+            name="Carrera"
+            value={this.state['Carrera']}
+            onChange={this.handleChange}
+          >
+            <FormControlLabel value="Ingeniería informática" control={<Radio />} label="Sí" />
+            <FormControlLabel value="" control={<Radio />} label="No" />
+          </RadioGroup>
+        </FormControl>
+        <FormControl>
+          <InputLabel htmlFor="Trabajo de">Trabajo de</InputLabel>
+          <Select
+            value={this.state['Trabajo de']}
+            onChange={this.handleChange}
+            inputProps={{
+              name: 'Trabajo de',
+              id: 'Trabajo de',
+            }}
+          >
+            <MenuItem value="Developer">Developer</MenuItem>
+            <MenuItem value="SysAdmin / DevOps">SysAdmin / DevOps</MenuItem>
+            <MenuItem value="HelpDesk">HelpDesk</MenuItem>
+            <MenuItem value="Networking">Networking</MenuItem>
+            <MenuItem value="PM">PM</MenuItem>
+            <MenuItem value="QA / Tester">QA / Tester</MenuItem>
+            <MenuItem value="Architect">Architect</MenuItem>
+            <MenuItem value="Designer">Designer</MenuItem>
+            <MenuItem value="Otro">Otro</MenuItem>
+          </Select>
+        </FormControl>
       </div>
     );
   }
@@ -128,12 +193,6 @@ class App extends Component {
 
 export default App;
 /*
-¿Gente a cargo?
-¿Cuánta?
-Nivel de estudios alcanzado
-Estado
-Carrera
-Realizaste cursos de especialización
 Trabajo de
 Tecnologías que utilizás
 Tecnologías que utilizás.1
