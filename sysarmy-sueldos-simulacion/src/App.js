@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
+
+import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
-import FormGroup from '@material-ui/core/FormGroup';
-import Checkbox from '@material-ui/core/Checkbox';
 
 const tech = {
   'Tecnologías que utilizás': ['Linux', '*BSD', 'AIX', 'OpenStack', 'Solaris', 'HP-UX', 'VMWare', 'Docker / Containers', 'Azure', 'Amazon Web Services'],
@@ -73,8 +75,8 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="xs">
+      <div>
+        <div>
           <FormControl component="fieldset" required className="form-element">
             <FormLabel component="legend">Me identifico</FormLabel>
             <RadioGroup
@@ -89,7 +91,7 @@ class App extends Component {
             </RadioGroup>
           </FormControl>
         </div>
-        <div className="xs">
+        <div>
           <FormControl className="form-element">
             <InputLabel htmlFor="Tengo">Tengo</InputLabel>
             <Select
@@ -114,7 +116,7 @@ class App extends Component {
             </Select>
           </FormControl>
         </div>
-        <div className="xs">
+        <div>
           <FormControl className="form-element">
             <InputLabel htmlFor="Años de experiencia">Años de experiencia</InputLabel>
             <Select
@@ -139,7 +141,7 @@ class App extends Component {
             </Select>
           </FormControl>
         </div>
-        <div className="xs">
+        <div>
           <FormControl className="form-element">
             <InputLabel htmlFor="Años en el puesto actual">Años en el puesto actual</InputLabel>
             <Select
@@ -164,7 +166,7 @@ class App extends Component {
             </Select>
           </FormControl>
         </div>
-        <div className="xs">
+        <div>
           <FormControl className="form-element">
             <TextField
               id="¿Cuánta?"
@@ -181,7 +183,7 @@ class App extends Component {
             />
           </FormControl>
         </div>
-        <div className="xs">
+        <div>
           <FormControl className="form-element">
             <InputLabel htmlFor="Nivel de estudios alcanzado">Nivel de estudios alcanzado</InputLabel>
             <Select
@@ -201,7 +203,7 @@ class App extends Component {
             </Select>
           </FormControl>
         </div>
-        <div className="xs">
+        <div>
           <FormControl className="form-element">
             <InputLabel htmlFor="Estado">Estado</InputLabel>
             <Select
@@ -218,8 +220,9 @@ class App extends Component {
             </Select>
           </FormControl>
         </div>
-        <div className="xs">
+        <div>
           <FormControl className="form-element">
+            <FormLabel component="legend">¿Estudiaste una carrera relacionada a Informática? (Lic. en Sistemas, Ingeniería Informática, etc)</FormLabel>
             <RadioGroup
               aria-label="¿Estudiaste una carrera relacionada a Informática? (Lic. en Sistemas, Ingeniería Informática, etc)"
               name="Carrera"
@@ -231,7 +234,7 @@ class App extends Component {
             </RadioGroup>
           </FormControl>
         </div>
-        <div className="xs">
+        <div>
           <FormControl className="form-element">
             <InputLabel htmlFor="Trabajo de">Trabajo de</InputLabel>
             <Select
@@ -254,7 +257,7 @@ class App extends Component {
             </Select>
           </FormControl>
         </div>
-        <div className="xs">
+        <div>
           <FormControl className="form-element">
             <FormLabel component="legend">Tecnologías que utilizás</FormLabel>
             <FormGroup>
@@ -274,7 +277,7 @@ class App extends Component {
             </FormGroup>
           </FormControl>
         </div>
-        <div className="xs">
+        <div>
           <FormControl className="form-element">
             <InputLabel htmlFor="Cantidad de empleados">Cantidad de empleados en la empresa</InputLabel>
             <Select
@@ -298,7 +301,7 @@ class App extends Component {
             </Select>
           </FormControl>
         </div>
-        <div className="xs">
+        <div>
           <FormControl className="form-element">
             <FormLabel component="legend">Beneficios Extra</FormLabel>
             <FormGroup>
@@ -317,6 +320,9 @@ class App extends Component {
               )}
             </FormGroup>
           </FormControl>
+          <Button variant="outlined" color="primary">
+            Calcular sueldo
+          </Button>
         </div>
       </div>
     );
