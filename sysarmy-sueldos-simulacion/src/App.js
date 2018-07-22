@@ -75,7 +75,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="App">
         <div>
           <FormControl component="fieldset" required className="form-element">
             <FormLabel component="legend">Me identifico</FormLabel>
@@ -263,6 +263,7 @@ class App extends Component {
             <FormGroup>
               {Object.keys(tech).map(ts => tech[ts].map((t) => 
               <FormControlLabel
+                key={`technology-${ts}-${t}`}
                 control={
                   <Checkbox
                     checked={this.state[ts].indexOf(t) >= 0}
@@ -307,6 +308,7 @@ class App extends Component {
             <FormGroup>
               {benefits.map((t) => 
               <FormControlLabel
+                key={`benefit-${t}`}
                 control={
                   <Checkbox
                     checked={this.state['Beneficios Extra'].indexOf(t) >= 0}
