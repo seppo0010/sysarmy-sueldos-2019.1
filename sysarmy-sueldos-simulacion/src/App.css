@@ -1,6 +1,6 @@
 .App {
   width: 80%;
-  max-width: 800px;
+  max-width: 900px;
   min-width: 200px;
   margin: 10px auto;
 }
@@ -11,4 +11,20 @@
 
 .form-element {
   width: 100%;
+}
+
+.result-list {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.result-list .result {
+  padding: 6px;
+  border: 1px solid black;
+  border-radius: 6px;
+  line-height: 200%;
+  width: 420px;
+  float: left;
+  box-sizing: border-box;
+  margin-right: 20px;
 }
