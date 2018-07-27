@@ -39,6 +39,12 @@ const benefits = [
 
 class Result extends Component {
   render() {
+    var formatter = new Intl.NumberFormat('es-AR', {
+      style: 'currency',
+      currency: 'ARS',
+      minimumFractionDigits: 2,
+    });
+
     return (
       <div className="result">
         <div><label>Me identifico: </label><strong>{this.props.data['Me identifico']}</strong></div>
@@ -63,10 +69,10 @@ class Result extends Component {
         }</strong></div>
         <div><label>Cantidad de empleados en la empresa: </label><strong>{this.props.data['Cantidad de empleados']}</strong></div>
         <div><label>Beneficios Extra: </label><strong>{this.props.data['Beneficios Extra'].join(', ')}</strong></div>
-        <div><label>Sueldo estimado (rfr2): </label><strong>{this.props.salary && this.props.salary.rfr2}</strong></div>
-        <div><label>Sueldo estimado (rfr): </label><strong>{this.props.salary && this.props.salary.rfr}</strong></div>
-        <div><label>Sueldo estimado (lr): </label><strong>{this.props.salary && this.props.salary.lr}</strong></div>
-        <div><label>Sueldo estimado (knn): </label><strong>{this.props.salary && this.props.salary.knn}</strong></div>
+        <div><label>Sueldo estimado (rfr2): </label><strong>{this.props.salary && this.props.salary.rfr2 && formatter.format(this.props.salary.rfr2)}</strong></div>
+        <div><label>Sueldo estimado (rfr): </label><strong>{this.props.salary && this.props.salary.rfr && formatter.format(this.props.salary.rfr)}</strong></div>
+        <div><label>Sueldo estimado (lr): </label><strong>{this.props.salary && this.props.salary.lr && formatter.format(this.props.salary.lr)}</strong></div>
+        <div><label>Sueldo estimado (knn): </label><strong>{this.props.salary && this.props.salary.knn && formatter.format(this.props.salary.knn)}</strong></div>
         <div className="error">{this.props.error}</div>
       </div>
     )
