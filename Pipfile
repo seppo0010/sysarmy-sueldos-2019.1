@@ -1,0 +1,26 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[dev-packages]
+
+
+
+[packages]
+
+flask = "*"
+scikit-learn = "*"
+flask-cors = "*"
+matplotlib = "*"
+pandas = "*"
+numpy = "*"
+scipy = "*"
+jupyter = "*"
+
+
+[requires]
+
+python_version = "3.5"
