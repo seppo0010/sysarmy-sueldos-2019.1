@@ -63,7 +63,11 @@ class Result extends Component {
         }</strong></div>
         <div><label>Cantidad de empleados en la empresa: </label><strong>{this.props.data['Cantidad de empleados']}</strong></div>
         <div><label>Beneficios Extra: </label><strong>{this.props.data['Beneficios Extra'].join(', ')}</strong></div>
-        <div><label>Sueldo estimado: </label><strong>{this.props.salary}</strong></div>
+        <div><label>Sueldo estimado (rfr2): </label><strong>{this.props.salary && this.props.salary.rfr2}</strong></div>
+        <div><label>Sueldo estimado (rfr): </label><strong>{this.props.salary && this.props.salary.rfr}</strong></div>
+        <div><label>Sueldo estimado (lr): </label><strong>{this.props.salary && this.props.salary.lr}</strong></div>
+        <div><label>Sueldo estimado (knn): </label><strong>{this.props.salary && this.props.salary.knn}</strong></div>
+        <div className="error">{this.props.error}</div>
       </div>
     )
   }
@@ -71,40 +75,75 @@ class Result extends Component {
 
 class App extends Component {
   state = {
-    'Me identifico': '',
-    'Tengo': '',
-    'Años de experiencia': '',
-    'Años en el puesto actual': '',
-    'Nivel de estudios alcanzado': '',
-    'Estado': '',
-    'Trabajo de': '',
-    '¿Cuánta?': '',
-    'Tecnologías que utilizás': [],
-    'Tecnologías que utilizás.1': [],
-    'Tecnologías que utilizás.2': [],
-    'Tecnologías que utilizás.3': [],
-    'Tecnologías que utilizás.4': [],
-    'Cantidad de empleados': '',
-    'Beneficios Extra': [],
+    changedSinceSubmitted: true,
+    answers: {
+      'Me identifico': '',
+      'Tengo': '',
+      'Años de experiencia': '',
+      'Años en el puesto actual': '',
+      'Nivel de estudios alcanzado': '',
+      'Estado': '',
+      'Trabajo de': '',
+      '¿Cuánta?': '',
+      'Tecnologías que utilizás': [],
+      'Tecnologías que utilizás.1': [],
+      'Tecnologías que utilizás.2': [],
+      'Tecnologías que utilizás.3': [],
+      'Tecnologías que utilizás.4': [],
+      'Cantidad de empleados': '',
+      'Beneficios Extra': [],
+    },
     'results': []
   };
 
   handleChange = event => {
+    this.setState({changedSinceSubmitted: true})
     const key = event.target.name
     const val = event.target.value
-    if (Array.isArray(this.state[key])) {
-      const index = this.state[key].indexOf(val)
+    if (Array.isArray(this.state.answers[key])) {
+      const index = this.state.answers[key].indexOf(val)
       if (index >= 0) {
-        const arr = this.state[key].concat([])
+        const arr = this.state.answers[key].concat([])
         arr.splice(index, 1)
-        this.setState({ [key]: arr });
+        this.setState({ answers: Object.assign({}, this.state.answers, { [key]: arr }) });
       } else {
-        this.setState({ [key]: this.state[key].concat([val]) });
+        this.setState({ answers: Object.assign({}, this.state.answers, { [key]: this.state.answers[key].concat([val]) }) });
       }
     } else {
-      this.setState({ [key]: val });
+      this.setState({ answers: Object.assign({}, this.state.answers, { [key]: val }) });
     }
   };
+
+  calculateSalary = () => {
+    this.setState({changedSinceSubmitted: false})
+    const answers = Object.assign({}, this.state.answers)
+    const index = this.state.results.length
+    this.setState({results: this.state.results.concat([{answers}]) })
+
+    var request = new XMLHttpRequest();
+    request.open('POST', 'http://localhost:5000/predict', true);
+    request.onload = function() {
+      let newResults = this.state.results.concat([])
+      try {
+        var data = JSON.parse(request.responseText);
+        if (request.status >= 200 && request.status < 400) {
+          newResults[index] = Object.assign({}, {answers}, {salary: data})
+        } else {
+          newResults[index] = Object.assign({}, {answers}, {error: `HTTP Status ${request.status}`})
+        }
+      } catch (e) {
+        newResults[index] = Object.assign({}, {answers}, {error: `json error (${e})`})
+      }
+      this.setState({results: newResults})
+    }.bind(this);
+    request.onerror = function() {
+      let newResults = this.state.results.concat([])
+      newResults[index] = Object.assign({}, answers, {error: 'request error'})
+      this.setState({results: newResults})
+    }.bind(this);
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    request.send(Object.keys(this.state.answers).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(this.state.answers[key])}`).join('&'));
+  }
 
   render() {
     return (
@@ -115,7 +154,7 @@ class App extends Component {
             <RadioGroup
               aria-label="Me identifico"
               name="Me identifico"
-              value={this.state['Me identifico']}
+              value={this.state.answers['Me identifico']}
               onChange={this.handleChange}
             >
               <FormControlLabel value="Hombre" control={<Radio />} label="Hombre" />
@@ -128,7 +167,7 @@ class App extends Component {
           <FormControl className="form-element">
             <InputLabel htmlFor="Tengo">Tengo</InputLabel>
             <Select
-              value={this.state['Tengo']}
+              value={this.state.answers['Tengo']}
               onChange={this.handleChange}
               inputProps={{
                 name: 'Tengo',
@@ -153,7 +192,7 @@ class App extends Component {
           <FormControl className="form-element">
             <InputLabel htmlFor="Años de experiencia">Años de experiencia</InputLabel>
             <Select
-              value={this.state['Años de experiencia']}
+              value={this.state.answers['Años de experiencia']}
               onChange={this.handleChange}
               inputProps={{
                 name: 'Años de experiencia',
@@ -178,7 +217,7 @@ class App extends Component {
           <FormControl className="form-element">
             <InputLabel htmlFor="Años en el puesto actual">Años en el puesto actual</InputLabel>
             <Select
-              value={this.state['Años en el puesto actual']}
+              value={this.state.answers['Años en el puesto actual']}
               onChange={this.handleChange}
               inputProps={{
                 name: 'Años en el puesto actual',
@@ -205,7 +244,7 @@ class App extends Component {
               id="¿Cuánta?"
               name="¿Cuánta?"
               label="¿Cuánta gente a cargo? (si no tenés, poné 0)"
-              value={this.state['¿Cuánta?']}
+              value={this.state.answers['¿Cuánta?']}
               onChange={this.handleChange}
               type="number"
               InputLabelProps={{
@@ -222,7 +261,7 @@ class App extends Component {
           <FormControl className="form-element">
             <InputLabel htmlFor="Nivel de estudios alcanzado">Nivel de estudios alcanzado</InputLabel>
             <Select
-              value={this.state['Nivel de estudios alcanzado']}
+              value={this.state.answers['Nivel de estudios alcanzado']}
               onChange={this.handleChange}
               inputProps={{
                 name: 'Nivel de estudios alcanzado',
@@ -242,7 +281,7 @@ class App extends Component {
           <FormControl className="form-element">
             <InputLabel htmlFor="Estado">Estado</InputLabel>
             <Select
-              value={this.state['Estado']}
+              value={this.state.answers['Estado']}
               onChange={this.handleChange}
               inputProps={{
                 name: 'Estado',
@@ -261,7 +300,7 @@ class App extends Component {
             <RadioGroup
               aria-label="¿Estudiaste una carrera relacionada a Informática? (Lic. en Sistemas, Ingeniería Informática, etc)"
               name="Carrera"
-              value={this.state['Carrera']}
+              value={this.state.answers['Carrera']}
               onChange={this.handleChange}
             >
               <FormControlLabel value="Ingeniería informática" control={<Radio />} label="Sí" />
@@ -273,7 +312,7 @@ class App extends Component {
           <FormControl className="form-element">
             <InputLabel htmlFor="Trabajo de">Trabajo de</InputLabel>
             <Select
-              value={this.state['Trabajo de']}
+              value={this.state.answers['Trabajo de']}
               onChange={this.handleChange}
               inputProps={{
                 name: 'Trabajo de',
@@ -301,7 +340,7 @@ class App extends Component {
                 key={`technology-${ts}-${t}`}
                 control={
                   <Checkbox
-                    checked={this.state[ts].indexOf(t) >= 0}
+                    checked={this.state.answers[ts].indexOf(t) >= 0}
                     onChange={this.handleChange}
                     name={ts}
                     value={t}
@@ -317,7 +356,7 @@ class App extends Component {
           <FormControl className="form-element">
             <InputLabel htmlFor="Cantidad de empleados">Cantidad de empleados en la empresa</InputLabel>
             <Select
-              value={this.state['Cantidad de empleados']}
+              value={this.state.answers['Cantidad de empleados']}
               onChange={this.handleChange}
               inputProps={{
                 name: 'Cantidad de empleados',
@@ -346,7 +385,7 @@ class App extends Component {
                 key={`benefit-${t}`}
                 control={
                   <Checkbox
-                    checked={this.state['Beneficios Extra'].indexOf(t) >= 0}
+                    checked={this.state.answers['Beneficios Extra'].indexOf(t) >= 0}
                     onChange={this.handleChange}
                     name="Beneficios Extra"
                     value={t}
@@ -357,13 +396,14 @@ class App extends Component {
               )}
             </FormGroup>
           </FormControl>
-          <Button variant="outlined" color="primary">
+          <Button variant="outlined" color="primary" onClick={this.calculateSalary}>
             Calcular sueldo
           </Button>
         </div>
         <div className="result-list">
-          <div style={{width: '440px'}}>
-            <Result data={this.state} salary="" />
+          <div style={{width: 440 * ((this.state.changedSinceSubmitted ? 1 : 0) + this.state.results.length)}}>
+            {this.state.changedSinceSubmitted && <Result data={this.state.answers} salary={{}} />}
+            {this.state.results.map((r, k) => <Result key={k} data={r.answers} salary={r.salary} error={r.error} />).reverse()}
           </div>
         </div>
       </div>
