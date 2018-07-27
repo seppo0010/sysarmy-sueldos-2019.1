@@ -244,8 +244,8 @@ def predict():
     row_transformed2 = transform_row2(row)
     row_normalized = normalize_row(row_transformed)
     return json.dumps({
-        'rfr': joblib.load('rfr.pkl').predict([[row_transformed[col] for col in COLS]])[0],
-        'rfr2': joblib.load('rfr2.pkl').predict([[row_transformed2[col] for col in COLS2]])[0],
-        'lr': joblib.load('lr.pkl').predict([[row_transformed[col] for col in COLS]])[0],
-        'knn': joblib.load('knn.pkl').predict([normalize_row(row_transformed)])[0],
+        'rfr': joblib.load('../models/rfr.pkl').predict([[row_transformed[col] for col in COLS]])[0],
+        'rfr2': joblib.load('../models/rfr2.pkl').predict([[row_transformed2[col] for col in COLS2]])[0],
+        'lr': joblib.load('../models/lr.pkl').predict([[row_transformed[col] for col in COLS]])[0],
+        'knn': joblib.load('../models/knn.pkl').predict([normalize_row(row_transformed)])[0],
     })
