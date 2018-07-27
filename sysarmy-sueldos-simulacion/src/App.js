@@ -51,6 +51,7 @@ class Result extends Component {
       <div className="result">
         <div><label>Me identifico: </label><strong>{this.props.data['Me identifico']}</strong></div>
         <div><label>Tengo: </label><strong>{this.props.data['Tengo']}</strong></div>
+        <div><label>Trabajo en: </label><strong>{this.props.data['Argentina']}</strong></div>
         <div><label>Años de experiencia: </label><strong>{this.props.data['Años de experiencia']}</strong></div>
         <div><label>Años en el puesto actual: </label><strong>{this.props.data['Años en el puesto actual']}</strong></div>
         <div><label>¿Cuánta gente a cargo?: </label><strong>{this.props.data['¿Cuánta?']}</strong></div>
@@ -87,6 +88,7 @@ class App extends Component {
     answers: {
       'Me identifico': '',
       'Tengo': '',
+      'Argentina': '',
       'Años de experiencia': '',
       'Años en el puesto actual': '',
       'Nivel de estudios alcanzado': '',
@@ -193,6 +195,37 @@ class App extends Component {
               <MenuItem value="41 - 45">41 - 45</MenuItem>
               <MenuItem value="46 - 49">46 - 49</MenuItem>
               <MenuItem value="50+">50+</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+        <div>
+          <FormControl className="form-element">
+            <InputLabel htmlFor="Argentina">Trabajo en</InputLabel>
+            <Select
+              value={this.state.answers['Argentina']}
+              onChange={this.handleChange}
+              inputProps={{
+                name: 'Argentina',
+                id: 'Argentina',
+              }}
+            >
+              <MenuItem value="Chaco">Chaco</MenuItem>
+              <MenuItem value="Chubut">Chubut</MenuItem>
+              <MenuItem value="Ciudad Autónoma de Buenos Aires">Ciudad Autónoma de Buenos Aires</MenuItem>
+              <MenuItem value="Córdoba">Córdoba</MenuItem>
+              <MenuItem value="Formosa">Formosa</MenuItem>
+              <MenuItem value="GBA">GBA</MenuItem>
+              <MenuItem value="La Pampa">La Pampa</MenuItem>
+              <MenuItem value="Mendoza">Mendoza</MenuItem>
+              <MenuItem value="Neuquén">Neuquén</MenuItem>
+              <MenuItem value="Provincia de Buenos Aires">Provincia de Buenos Aires</MenuItem>
+              <MenuItem value="Río Negro">Río Negro</MenuItem>
+              <MenuItem value="San Juan">San Juan</MenuItem>
+              <MenuItem value="San Luis">San Luis</MenuItem>
+              <MenuItem value="Santa Cruz">Santa Cruz</MenuItem>
+              <MenuItem value="Santa Fe">Santa Fe</MenuItem>
+              <MenuItem value="Santiago del Estero">Santiago del Estero</MenuItem>
+              <MenuItem value="Tierra del Fuego">Tierra del Fuego</MenuItem>
             </Select>
           </FormControl>
         </div>
