@@ -14,6 +14,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 
+const PREDICT_URL = 'http://localhost:5000/predict'
+
 const tech = {
   'Tecnologías que utilizás': ['Linux', '*BSD', 'AIX', 'OpenStack', 'Solaris', 'HP-UX', 'VMWare', 'Docker / Containers', 'Azure', 'Amazon Web Services'],
   'Tecnologías que utilizás.1': ['HTML', 'CSS', 'Javascript', 'jQuery', 'Java', 'PHP', 'Python', '.NET', 'NodeJS', 'C#', 'Ruby', 'Perl', 'Go', 'Scala', 'VB*', 'C++', 'C', 'ABAP', 'Swift', 'Objective-C'],
@@ -127,7 +129,7 @@ class App extends Component {
     this.setState({results: this.state.results.concat([{answers}]) })
 
     var request = new XMLHttpRequest();
-    request.open('POST', 'http://localhost:5000/predict', true);
+    request.open('POST', PREDICT_URL, true);
     request.onload = function() {
       let newResults = this.state.results.concat([])
       try {
