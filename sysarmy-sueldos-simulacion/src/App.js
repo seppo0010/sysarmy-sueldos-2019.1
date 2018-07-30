@@ -158,6 +158,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <p>Complet&aacute; el formulario siguiente y obten&eacute; una estimaci&oacute;n del sueldo bruto que podr&iacute;as estar ganando.</p>
+        <p>El sueldo se estima de acuerdo a varios modelos, el modelo "rfr2" es el que mejor resultados da.</p>
+        <p>Si te interesa saber c&oacute;mo est&aacute;n armados, pod&eacute;s leer el paso a paso que no requiere mucho conocimento previo <a href="https://github.com/seppo0010/sysarmy-sueldos/blob/master/notebook/Sysarmy%20-%20Predicci%C3%B3n%20de%20sueldos.ipynb" target="_blank" rel="noopener noreferrer">aqu&iacute;</a>.</p>
+        <p>Los modelos se armaron con datos recolectados en la <a href="https://sysarmy.wordpress.com/2018/03/05/resultados-de-la-encuesta-de-sueldos-2018-1/" target="_blank" rel="noopener noreferrer">encuesta de sysarmy</a> llevada a cabo durante los primeros meses de 2018.</p>
+        <hr/>
         <div>
           <FormControl component="fieldset" required className="form-element">
             <FormLabel component="legend">Me identifico</FormLabel>
