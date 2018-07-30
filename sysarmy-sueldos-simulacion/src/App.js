@@ -87,20 +87,20 @@ class App extends Component {
     changedSinceSubmitted: true,
     answers: {
       'Me identifico': '',
-      'Tengo': '',
-      'Argentina': '',
-      'Años de experiencia': '',
-      'Años en el puesto actual': '',
+      'Tengo': 'Menos de 18 años',
+      'Argentina': 'Ciudad Autónoma de Buenos Aires',
+      'Años de experiencia': 'Menos de un año',
+      'Años en el puesto actual': 'Menos de un año',
       'Nivel de estudios alcanzado': '',
       'Estado': '',
       'Trabajo de': '',
-      '¿Cuánta?': '',
+      '¿Cuánta?': '0',
       'Tecnologías que utilizás': [],
       'Tecnologías que utilizás.1': [],
       'Tecnologías que utilizás.2': [],
       'Tecnologías que utilizás.3': [],
       'Tecnologías que utilizás.4': [],
-      'Cantidad de empleados': '',
+      'Cantidad de empleados': '1-10',
       'Beneficios Extra': [],
     },
     'results': []
@@ -286,6 +286,30 @@ class App extends Component {
         </div>
         <div>
           <FormControl className="form-element">
+            <InputLabel htmlFor="Cantidad de empleados">Cantidad de empleados en la empresa</InputLabel>
+            <Select
+              value={this.state.answers['Cantidad de empleados']}
+              onChange={this.handleChange}
+              inputProps={{
+                name: 'Cantidad de empleados',
+                id: 'Cantidad de empleados',
+              }}
+            >
+              <MenuItem value="1-10">1-10</MenuItem>
+              <MenuItem value="11-50">11-50</MenuItem>
+              <MenuItem value="51-100">51-100</MenuItem>
+              <MenuItem value="101-200">101-200</MenuItem>
+              <MenuItem value="201-500">201-500</MenuItem>
+              <MenuItem value="501-1000">201-500</MenuItem>
+              <MenuItem value="1001-2000">1001-2000</MenuItem>
+              <MenuItem value="2001-5000">2001-5000</MenuItem>
+              <MenuItem value="5001-10000">5001-10000</MenuItem>
+              <MenuItem value="10001+">10001+</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+        <div>
+          <FormControl className="form-element">
             <TextField
               id="¿Cuánta?"
               name="¿Cuánta?"
@@ -380,7 +404,7 @@ class App extends Component {
         <div>
           <FormControl className="form-element">
             <FormLabel component="legend">Tecnologías que utilizás</FormLabel>
-            <FormGroup>
+            <FormGroup style={{height: '820px', 'flex-direction': 'column'}}>
               {Object.keys(tech).map(ts => tech[ts].map((t) => 
               <FormControlLabel
                 key={`technology-${ts}-${t}`}
@@ -400,45 +424,22 @@ class App extends Component {
         </div>
         <div>
           <FormControl className="form-element">
-            <InputLabel htmlFor="Cantidad de empleados">Cantidad de empleados en la empresa</InputLabel>
-            <Select
-              value={this.state.answers['Cantidad de empleados']}
-              onChange={this.handleChange}
-              inputProps={{
-                name: 'Cantidad de empleados',
-                id: 'Cantidad de empleados',
-              }}
-            >
-              <MenuItem value="1-10">1-10</MenuItem>
-              <MenuItem value="11-50">11-50</MenuItem>
-              <MenuItem value="51-100">51-100</MenuItem>
-              <MenuItem value="101-200">101-200</MenuItem>
-              <MenuItem value="201-500">201-500</MenuItem>
-              <MenuItem value="501-1000">201-500</MenuItem>
-              <MenuItem value="1001-2000">1001-2000</MenuItem>
-              <MenuItem value="2001-5000">2001-5000</MenuItem>
-              <MenuItem value="5001-10000">5001-10000</MenuItem>
-              <MenuItem value="10001+">10001+</MenuItem>
-            </Select>
-          </FormControl>
-        </div>
-        <div>
-          <FormControl className="form-element">
             <FormLabel component="legend">Beneficios Extra</FormLabel>
-            <FormGroup>
-              {benefits.map((t) => 
-              <FormControlLabel
-                key={`benefit-${t}`}
-                control={
-                  <Checkbox
-                    checked={this.state.answers['Beneficios Extra'].indexOf(t) >= 0}
-                    onChange={this.handleChange}
-                    name="Beneficios Extra"
-                    value={t}
-                  />
-                }
-                label={t}
-              />
+            <FormGroup style={{height: '380px', 'flex-direction': 'column'}}>
+              {benefits.map((t) => <div>
+                <FormControlLabel
+                  key={`benefit-${t}`}
+                  control={
+                    <Checkbox
+                      checked={this.state.answers['Beneficios Extra'].indexOf(t) >= 0}
+                      onChange={this.handleChange}
+                      name="Beneficios Extra"
+                      value={t}
+                    />
+                  }
+                  label={t}
+                />
+              </div>
               )}
             </FormGroup>
           </FormControl>
