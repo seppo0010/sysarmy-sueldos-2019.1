@@ -14,7 +14,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 
-const PREDICT_URL = 'http://localhost:5000/predict'
+const PREDICT_URL = 'http://98.234.196.35.bc.googleusercontent.com:8180/predict'
 
 const tech = {
   'Tecnologías que utilizás': ['Linux', '*BSD', 'AIX', 'OpenStack', 'Solaris', 'HP-UX', 'VMWare', 'Docker / Containers', 'Azure', 'Amazon Web Services'],
