@@ -1,0 +1,36 @@
+.result-list {
+  width: 100%;
+  padding-bottom: 10px;
+  overflow-x: auto;
+}
+
+.result-list .result {
+  line-height: 200%;
+  width: 100%;
+  box-sizing: border-box;
+  margin-right: 20px;
+  margin-top: 20px;
+  padding: 10px 0;
+}
+
+.result-salary-container {
+  border: 1px solid #999;
+}
+
+.result-salary-container > div {
+  display: flex;
+}
+.result-model {
+  width: 50%;
+  text-align: center;
+  font-weight: bold;
+}
+
+.result-salary {
+  width: 200px;
+  text-align: center;
+}
+
+.result-gray-bg {
+  background-color: #f1f1f1;
+}

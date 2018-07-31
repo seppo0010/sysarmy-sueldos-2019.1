@@ -101,10 +101,17 @@ class Form extends Component {
       salary: getJsonPrediction
     })
 
+    
+
     this.setState({
       isCalculating: false
     })
+
     this.props.handleChange('results', results)
+    window.scroll({
+      top: 2500,
+      behavior: 'smooth'
+    })
   }
 
   render() {
