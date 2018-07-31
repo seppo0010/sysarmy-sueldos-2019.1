@@ -13,6 +13,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
+import Spinner from '../Spinner/Spinner'
 
 const PREDICT_URL = 'https://cors-anywhere.herokuapp.com/http://98.234.196.35.bc.googleusercontent.com:8180/predict'
 
@@ -22,7 +23,8 @@ class Form extends Component {
 
     this.state = {
       answers: props.answers,
-      results: props.results
+      results: props.results,
+      isCalculating: false
     }
 
     this.tech = {
@@ -70,9 +72,11 @@ class Form extends Component {
   };
 
   calculateSalary = async () => {
-    this.setState({changedSinceSubmitted: false})
+    this.setState({
+      isCalculating: true
+    })
+
     const answers = this.state.answers
-    this.setState({results: this.state.results.concat([{answers}]) })
     let results = this.state.results
     let formBody = [];
 
@@ -97,6 +101,9 @@ class Form extends Component {
       salary: getJsonPrediction
     })
 
+    this.setState({
+      isCalculating: false
+    })
     this.props.handleChange('results', results)
   }
 
@@ -388,7 +395,12 @@ class Form extends Component {
             </FormGroup>
           </FormControl>
           <Button variant="outlined" color="primary" onClick={this.calculateSalary}>
-            Calcular sueldo
+            {this.state.isCalculating &&
+              <Spinner />
+            }
+            {!this.state.isCalculating &&
+              <span>Calcular sueldo</span>
+            }
           </Button>
         </div>
       </div>
