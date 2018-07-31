@@ -17,7 +17,6 @@ class ResultList extends Component {
           {this.props.results.length > 0 &&
             <React.Fragment>
               {this.props.results.map((r, k) => {
-                console.log(123, r.answers, r.salary)
                 return(
                   <Result key={k} data={r.answers} salary={r.salary} error={r.error} />
                 )

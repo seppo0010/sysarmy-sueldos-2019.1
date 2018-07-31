@@ -71,10 +71,11 @@ class Form extends Component {
 
   calculateSalary = async () => {
     this.setState({changedSinceSubmitted: false})
-    const answers = this.props.answers
+    const answers = this.state.answers
     this.setState({results: this.state.results.concat([{answers}]) })
-    let results = this.props.results
+    let results = this.state.results
     let formBody = [];
+
     for (let answer in answers) {
       let encodedKey = encodeURIComponent(answer);
       let encodedValue = encodeURIComponent(answers[answer]);
@@ -95,6 +96,7 @@ class Form extends Component {
       answers: this.props.answers,
       salary: getJsonPrediction
     })
+
     this.props.handleChange('results', results)
   }
 
@@ -369,9 +371,8 @@ class Form extends Component {
           <FormControl className="form-element">
             <FormLabel component="legend">Beneficios Extra</FormLabel>
             <FormGroup style={{height: '380px', 'flexDirection': 'column'}}>
-              {this.benefits.map((t) => <div>
+              {this.benefits.map((t) => <div key={`benefit-${t}`}>
                 <FormControlLabel
-                  key={`benefit-${t}`}
                   control={
                     <Checkbox
                       checked={this.state.answers['Beneficios Extra'].indexOf(t) >= 0}
