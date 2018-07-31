@@ -1,16 +1,21 @@
+#root {
+  background-color: #f1f1f1;
+}
 .App {
   width: 80%;
   max-width: 900px;
   min-width: 200px;
-  margin: 10px auto;
-}
-
-.App > div {
-  margin: 20px 0;
+  margin: 0px auto;
+  background-color: #fff;
+  padding: 0px 30px;
 }
 
 .form-element {
   width: 100%;
+}
+
+.form-container {
+  margin: 20px 0;
 }
 
 .checkbox {
