@@ -109,7 +109,7 @@ class Form extends Component {
 
     this.props.handleChange('results', results)
     window.scroll({
-      top: 2500,
+      top: 12500,
       behavior: 'smooth'
     })
   }
@@ -363,10 +363,11 @@ class Form extends Component {
         <div className="form-container">
           <FormControl className="form-element">
             <FormLabel component="legend">Tecnologías que utilizás</FormLabel>
-            <FormGroup style={{height: '820px', 'flexDirection': 'column'}}>
+            <FormGroup className="technology-container">
               {Object.keys(this.tech).map(ts => this.tech[ts].map((t) => 
               <FormControlLabel
                 key={`technology-${ts}-${t}`}
+                class="technology-label"
                 control={
                   <Checkbox
                     checked={this.state.answers[ts].indexOf(t) >= 0}
@@ -384,9 +385,10 @@ class Form extends Component {
         <div className="form-container">
           <FormControl className="form-element">
             <FormLabel component="legend">Beneficios Extra</FormLabel>
-            <FormGroup style={{height: '380px', 'flexDirection': 'column'}}>
-              {this.benefits.map((t) => <div key={`benefit-${t}`}>
-                <FormControlLabel
+            <FormGroup className="technology-container">
+              {this.benefits.map((t) => <FormControlLabel
+                  class="technology-label" 
+                  key={`benefit-${t}`}
                   control={
                     <Checkbox
                       checked={this.state.answers['Beneficios Extra'].indexOf(t) >= 0}
@@ -397,11 +399,10 @@ class Form extends Component {
                   }
                   label={t}
                 />
-              </div>
               )}
             </FormGroup>
           </FormControl>
-          <Button variant="outlined" color="primary" onClick={this.calculateSalary}>
+          <Button className="button-margin" variant="outlined" color="primary" onClick={this.calculateSalary}>
             {this.state.isCalculating &&
               <Spinner />
             }
