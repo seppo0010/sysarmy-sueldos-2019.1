@@ -11,7 +11,13 @@ import pandas as pd
 app = Flask(__name__)
 CORS(app)
 
-DATA = pd.read_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../notebook/Encuesta de remuneración salarial de sysarmy - 2018.1 - Argentina.csv'), skiprows=3)
+df = pd.read_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../notebook/Encuesta de remuneración salarial de sysarmy - 2018.1 - Argentina.csv'), skiprows=3)
+df = df[df['Salario mensual (en tu moneda local)'] <= 200000]
+df = df[df['Salario mensual (en tu moneda local)'] > 10000]
+df = df[df['¿Bruto o neto?'] == 'Bruto']
+df = df[df['Tipo de contrato'] == 'Full-Time']
+DATA = df
+
 
 COLS = ['age', 'current_position_years', 'experience_years', 'is_automated_test', 'is_backend', 'is_caba', 'is_cba', 'is_cloud', 'is_computer_degree', 'is_developer', 'is_docker', 'is_frontend', 'is_gba', 'is_lowlevelstuff', 'is_male', 'is_mobile', 'is_nosql', 'is_pba', 'is_santafe', 'is_sql', 'is_startup', 'is_sysadmin', 'is_unix', 'is_vmware', 'is_windows', 'log_in_charge_of', 'study']
 COLS2 = ['age', 'current_position_years', 'experience_years', 'has_bonus', 'has_candies', 'has_capacitation', 'has_drinks', 'has_flexible_timing', 'has_food', 'has_gym_discount', 'has_inflation_rise', 'has_internet', 'has_language_courses', 'has_laptop', 'has_snacks', 'has_wfh', 'is_Ciudad Autónoma de Buenos Aires', 'is_GBA', 'is_Provincia de Buenos Aires', 'is_architect', 'is_automated_test', 'is_backend', 'is_centro', 'is_cloud', 'is_computer_degree', 'is_cuyo', 'is_designer', 'is_developer', 'is_frontend', 'is_helpdesk', 'is_linux', 'is_male', 'is_mobile', 'is_networking', 'is_nosql', 'is_pampa', 'is_patagonia', 'is_pm', 'is_qa', 'is_sql', 'is_startup', 'is_sysadmin', 'is_vmware', 'is_windows', 'log_in_charge_of', 'study']
