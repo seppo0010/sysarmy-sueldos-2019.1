@@ -1,36 +1,24 @@
+#root {
+  background-color: #f1f1f1;
+}
 .App {
   width: 80%;
   max-width: 900px;
   min-width: 200px;
-  margin: 10px auto;
-}
-
-.App > div {
-  margin: 20px 0;
+  margin: 0px auto;
+  background-color: #fff;
+  padding: 0px 30px;
 }
 
 .form-element {
   width: 100%;
 }
 
+.form-container {
+  margin: 20px 0;
+}
+
 .checkbox {
     width: 200px;
     float: left;
-}
-
-.result-list {
-  width: 100%;
-  padding-bottom: 10px;
-  overflow-x: auto;
-}
-
-.result-list .result {
-  padding: 6px;
-  border: 1px solid black;
-  border-radius: 6px;
-  line-height: 200%;
-  width: 420px;
-  float: left;
-  box-sizing: border-box;
-  margin-right: 20px;
 }

@@ -1,0 +1,23 @@
+.form-main-container {
+  margin-top: 70px;
+  padding-top: 10px;
+}
+
+.form-container .technology-container {
+  flex-direction: row;
+}
+
+.technology-label {
+  width: 232px;
+  display: flex;
+  align-items: center;
+}
+
+.form-container .button-margin {
+  margin-top: 20px;
+}
+@media(min-width: 1000px) {
+  .technology-label {
+    width: 33%;
+  }
+}
