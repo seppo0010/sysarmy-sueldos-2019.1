@@ -1,16 +1,11 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
 [dev-packages]
 
-
-
 [packages]
-
 flask = "*"
 scikit-learn = "*"
 flask-cors = "*"
@@ -19,8 +14,10 @@ pandas = "*"
 numpy = "*"
 scipy = "*"
 jupyter = "*"
-
+pillow = "*"
+keras = "*"
+tensorflow = "*"
+tensorflow-gpu = "*"
 
 [requires]
-
 python_version = "3.6"
