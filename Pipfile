@@ -19,6 +19,7 @@ pandas = "*"
 numpy = "*"
 scipy = "*"
 jupyter = "*"
+xgboost = "*"
 
 
 [requires]
