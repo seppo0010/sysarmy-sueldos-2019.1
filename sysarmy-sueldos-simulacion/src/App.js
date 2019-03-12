@@ -14,8 +14,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 
-// const PREDICT_URL = 'https://cors-anywhere.herokuapp.com/http://98.234.196.35.bc.googleusercontent.com:8180/predict'
-const PREDICT_URL = 'http://localhost:5000/predict'
+const PREDICT_URL = 'https://cors-anywhere.herokuapp.com/http://98.234.196.35.bc.googleusercontent.com:8180/predict'
+// const PREDICT_URL = 'http://localhost:5000/predict'
 
 const specialization = ['No', 'Sí, de forma particular', 'Sí, los pagó un empleador']
 const events = ['Nerdearla', 'EkoParty', 'NodeConfAr']
