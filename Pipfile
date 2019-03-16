@@ -1,16 +1,11 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
 [dev-packages]
 
-
-
 [packages]
-
 flask = "*"
 scikit-learn = "*"
 flask-cors = "*"
@@ -20,8 +15,8 @@ numpy = "*"
 scipy = "*"
 jupyter = "*"
 xgboost = "*"
-
+category-encoders = {git = "https://github.com/scikit-learn-contrib/categorical-encoding"}
+statsmodels = "*"
 
 [requires]
-
 python_version = "3.6"
